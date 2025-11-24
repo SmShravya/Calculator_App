@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOcument</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            padding: 40px;
+            background:black;
+            height: 450px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 30px;
+        }
+
+        .display {
+            width: 94%;
+            align-items: center;
+            height: 50px;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 40px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color:rgb(33, 31, 31);
+           
+            color: white;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 70px);
+            gap: 20px;
+            
+        }
+
+        button {
+            padding: 18px;
+            margin-bottom: 8px;
+            font-size: 18px;
+            color: white;
+            border: none;
+            background-color: #000000;
+            cursor: pointer;
+           
+            
+            border-radius: 50px;
+           box-shadow: 0px 5px 8px #bdbebc;
+            
+        }
+
+        button:hover {
+            background-color: #b0abab;
+        }
+
+        .equal {
+            background-color:black;
+            color:#6dce18;
+        }
+
+        .equal:hover {
+          background-color: #313030
+           
+        }
+
+        .operator {
+            background-color: rgb(0, 0, 0);
+            color: #6dce18;
+        }
+        .operator:hover{
+          background-color: #313030
+        }
+        .clear{
+            background-color: rgb(0, 0, 0);
+            color: #6dce18;
+        }
+        .clear:hover{
+           background-color: #313030;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+        
+        <div class="buttons">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="operator">/</button>
+
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="operator">*</button>
+
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button class="operator">-</button>
+
+            <button>0</button>
+            <button class="clear">AC</button>
+            <button class="equal">=</button>
+            <button class="operator">+</button>
+        </div>
+    </div>
+    <script>
+        const display = document.getElementById("display");
+        const buttons = document.querySelectorAll("button");
+
+        let expression = "";
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                const value = button.textContent;
+
+                if (value === "AC") {
+                    expression = "";
+                    display.value = "";
+                } else if (value === "=") {
+                    try {
+                        expression = eval(expression).toString();
+                        display.value = expression;
+                    } catch {
+                        display.value = "Error";
+                        expression = "";
+                    }
+                } else {
+                    expression += value;
+                    display.value = expression;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
